@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            max-width: 1000px;
+        }
+        .colordiv {
+            margin: 20px;
+            height: 75px;
+            width: 150px;
+            background: rgba(255, 0, 0);
+            padding: 30px;
+        }
+        #colors{
+            display: flex;
+        }
+        .whitediv {
+            height: 100%;
+            width: 100%;
+            background: rgba(255, 255, 255, 55%);
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .colorname {
+            padding: 10px;
+            font-size: 22px;
+            text-transform: uppercase;
+            font-weight: 200;
+        }
+
+        .colortype {
+            font-size: 13px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .colorcode {
+            font-size: 17px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Create New Color</h1>
+    <form method="post">
+        <label>Color:</label>
+        <br>
+        <input id="name">
+        <br>
+        <label>Color:</label>
+        <br>
+        <select id="type">
+            <option value="rgb">RGB</option>
+            <option value="rgba">RGBA</option>
+            <option value="hex">HEX</option>
+        </select>
+        <br>
+        <label>Code:</label>
+        <br>
+        <input id="code">
+        <br>
+        <button type="submit">Add</button>
+    </form>
+    <h2>All colors</h2>
+    <div id="colors"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let form = document.querySelector("form");
+            let name = form.querySelector("#name");
+            let type = form.querySelector("#type");
+            let code = form.querySelector("#code");
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                let div = document.createElement("div");
+                let n = name.value;
+                let t = type.value;
+                let c = code.value;
+                let style = "";
+                switch (t) {
+                    case 'rgb':
+                        style = `rgb(${c})`;
+                        break;
+                    case 'rgba':
+                        style = `rgba(${c})`;
+                        break;
+                    case 'hex':
+                        style = `${c}`;
+                        break;
+                }
+                div.innerHTML=`<div style="background:${style};" class="colordiv">
+        <div class="whitediv">
+            <a class="colorname">${n}</a>
+            <br>
+            <a class="colortype">${t}</a>
+            <br>
+            <a class="colorcode">255,0,0</a>
+        </div>
+    </div>`;
+                document.querySelector("#colors").appendChild(div);
+            });
+        });
+    </script>
+</body>
+
+</html>
